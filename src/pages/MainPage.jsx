@@ -3,7 +3,11 @@ import Categories from "../components/Categories";
 import PizzaBlock from "../components/PizzaBlock";
 import Sort from "../components/Sort";
 
+import { SearchedContext } from "../App";
+
 const MainPage = () => {
+  const { searchedWord } = React.useContext(SearchedContext);
+
   const [items, setItems] = React.useState([]);
   const [categoriesID, setCategoriesID] = React.useState(0);
   const [sorterActive, setSorterActive] = React.useState({
@@ -13,6 +17,14 @@ const MainPage = () => {
 
   const categoryParams = categoriesID > 0 ? `category=${categoriesID}` : "";
   const sorterParams = `${sorterActive.paramName}&order=desc`;
+
+  const searchedPizza = items.filter((pizza) => {
+    return pizza?.title.toLowerCase().includes(searchedWord.toLowerCase());
+  });
+
+  const pizzaItems = searchedPizza.map((pizza) => {
+    return <PizzaBlock key={pizza.id} {...pizza} />;
+  });
 
   React.useEffect(() => {
     fetch(
@@ -39,11 +51,7 @@ const MainPage = () => {
         />
       </div>
       <h2 className="content__title">Все пиццы</h2>
-      <div className="content__items">
-        {items.map((pizza) => {
-          return <PizzaBlock key={pizza.id} {...pizza} />;
-        })}
-      </div>
+      <div className="content__items">{pizzaItems}</div>
     </>
   );
 };

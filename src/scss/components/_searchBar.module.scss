@@ -1,0 +1,39 @@
+.searchBarWrapper {
+  position: relative;
+  left: -185px;
+
+  align-items: center;
+  width: 300px;
+
+  .searchIMG {
+    position: absolute;
+    left: 3%;
+    top: 35%;
+    opacity: 0.4;
+  }
+
+  .searchInput {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 12px 35px;
+
+    width: 100%;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+
+  .searchCross {
+    cursor: pointer;
+    width: 20px;
+    position: absolute;
+    right: 3%;
+    top: 35%;
+    opacity: 0.4;
+
+    &:hover {
+      opacity: 0.7;
+    }
+    &:active {
+      opacity: 1;
+    }
+  }
+}
