@@ -1,8 +1,6 @@
 import React from "react";
 
-const Categories = () => {
-  const [activeID, setActiveID] = React.useState(0);
-
+const Categories = ({ categoriesID, changeActiveID }) => {
   const categories = [
     "Все",
     "Мясные",
@@ -12,10 +10,6 @@ const Categories = () => {
     "Закрытые",
   ];
 
-  const changeActiveID = (id) => {
-    setActiveID(id);
-  };
-
   return (
     <div className="categories">
       <ul>
@@ -23,7 +17,7 @@ const Categories = () => {
           return (
             <li
               key={id}
-              className={id === activeID ? "active" : " "}
+              className={id === categoriesID ? "active" : " "}
               onClick={() => {
                 changeActiveID(id);
               }}

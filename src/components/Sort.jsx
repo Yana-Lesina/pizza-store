@@ -1,12 +1,15 @@
 import React from "react";
 
-const Sort = () => {
+const Sort = ({ sorterActive, changeSorterActive }) => {
   const [showPopup, setShowPopup] = React.useState(false);
-  const [sorterID, setSorterID] = React.useState(0);
-  const sortersList = ["популярности", "цене", "алфавиту"];
+  const sortersList = [
+    { name: "популярности", paramName: "rating" },
+    { name: "цене", paramName: "price" },
+    { name: "алфавиту", paramName: "title" },
+  ];
 
   const doSelection = (id) => {
-    setSorterID(id);
+    changeSorterActive(sortersList[id]);
     setShowPopup(false);
   };
 
@@ -27,7 +30,7 @@ const Sort = () => {
         </svg>
         <b>Сортировка по:</b>
         <span onClick={() => setShowPopup(!showPopup)}>
-          {sortersList[sorterID]}
+          {sorterActive.name}
         </span>
       </div>
       {showPopup && (
@@ -37,12 +40,12 @@ const Sort = () => {
               return (
                 <li
                   key={id}
-                  className={id === sorterID ? "active" : ""}
+                  className={sorter.name === sorterActive.name ? "active" : ""}
                   onClick={() => {
                     doSelection(id);
                   }}
                 >
-                  {sorter}
+                  {sorter.name}
                 </li>
               );
             })}
